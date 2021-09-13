@@ -1,16 +1,15 @@
 const getPokemonUrl = id => `https://pokeapi.co/api/v2/pokemon/${id}`
 
-const generateProkemonPromises = () => Array(150).fill().map((_, index) => 
+const generateProkemonPromises = () => Array(700).fill().map((_, index) => 
         fetch(getPokemonUrl(index + 1)).then(response => response.json()))
 
 const backImage = (element, id) => {
-
-    element.setAttribute('src', `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`)
+    (!element.getAttribute('src').includes("shiny")) ? element.setAttribute('src', `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`) : element.setAttribute('src', `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${id}.png`)
 }
 
 const frontImage = (element, id) => {
 
-    element.setAttribute('src', `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`)
+    element.setAttribute('src', `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png`)
 }
 
 const generateHTML = pokemons => pokemons.reduce((acc, { name, id, types, sprites : {front_default} }) => {
